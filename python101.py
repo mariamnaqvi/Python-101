@@ -84,9 +84,9 @@
 # %% [code]
 # Example problem:
 # Uncomment the line below and run this cell.
-#The hashtag "#" character in a line of Python code is the comment character. To "comment" means to add the # and to "uncomment" means to remove the # character.
+The hashtag "#" character in a line of Python code is the comment character. To "comment" means to add the # and to "uncomment" means to remove the # character.
 
-doing_python_right_now = True
+# doing_python_right_now = True
 
 # The lines below will test your answer. If you see an error, then it means that your answer is incorrect or incomplete.
 assert doing_python_right_now == True, "If you see a NameError, it means that the variable is not created and assigned a value. An 'Assertion Error' means that the value of the variable is incorrect." 
@@ -634,7 +634,13 @@ print("Exercise 45 is correct.")
 # %% [code]
 # Exercise 46
 # Write a function definition named remove_vowels that takes in string and returns the string without any vowels
-
+def remove_vowels(s):
+    s2=""
+    for char in s:
+        if not is_vowel(char):
+           s2+=char
+    return s2
+    
 assert remove_vowels("banana") == "bnn"
 assert remove_vowels("ubuntu") == "bnt"
 assert remove_vowels("mango") == "mng"
@@ -644,7 +650,10 @@ print("Exercise 46 is correct.")
 # %% [code]
 # Exercise 47
 # Write a function definition named starts_with_vowel that takes in string and True if the string starts with a vowel
-
+def starts_with_vowel(s):
+    if is_vowel(s[0]):
+        return True
+    return False
 assert starts_with_vowel("ubuntu") == True
 assert starts_with_vowel("banana") == False
 assert starts_with_vowel("mango") == False
@@ -653,7 +662,8 @@ print("Exercise 47 is correct.")
 # %% [code]
 # Exercise 48
 # Write a function definition named ends_with_vowel that takes in string and True if the string ends with a vowel
-
+def ends_with_vowel(s):
+    return True if is_vowel(s[-1]) else False
 assert ends_with_vowel("ubuntu") == True
 assert ends_with_vowel("banana") == True
 assert ends_with_vowel("mango") == True
@@ -663,7 +673,8 @@ print("Exercise 48 is correct.")
 # %% [code]
 # Exercise 49
 # Write a function definition named starts_and_ends_with_vowel that takes in string and returns True if the string starts and ends with a vowel
-
+def starts_and_ends_with_vowel(s):
+    return True if (starts_with_vowel(s) and ends_with_vowel(s)) else False
 assert starts_and_ends_with_vowel("ubuntu") == True
 assert starts_and_ends_with_vowel("banana") == False
 assert starts_and_ends_with_vowel("mango") == False
@@ -675,6 +686,8 @@ print("Exercise 49 is correct.")
 # %% [code]
 # Exercise 50
 # Write a function definition named first that takes in sequence and returns the first value of that sequence.
+def first(s):
+    return s[0]
 assert first("ubuntu") == "u"
 assert first([1, 2, 3]) == 1
 assert first(["python", "is", "awesome"]) == "python"
@@ -683,7 +696,8 @@ print("Exercise 50 is correct.")
 # %% [code]
 # Exercise 51
 # Write a function definition named second that takes in sequence and returns the second value of that sequence.
-
+def second(s):
+    return s[1]
 assert second("ubuntu") == "b"
 assert second([1, 2, 3]) == 2
 assert second(["python", "is", "awesome"]) == "is"
@@ -692,7 +706,8 @@ print("Exercise 51 is correct.")
 # %% [code]
 # Exercise 52
 # Write a function definition named third that takes in sequence and returns the third value of that sequence.
-
+def third(s):
+    return s[2]
 assert third("ubuntu") == "u"
 assert third([1, 2, 3]) == 3
 assert third(["python", "is", "awesome"]) == "awesome"
@@ -701,7 +716,8 @@ print("Exercise 52 is correct.")
 # %% [code]
 # Exercise 53
 # Write a function definition named forth that takes in sequence and returns the forth value of that sequence.
-
+def forth(s):
+    return s[3]
 assert forth("ubuntu") == "n"
 assert forth([1, 2, 3, 4]) == 4
 assert forth(["python", "is", "awesome", "right?"]) == "right?"
@@ -710,7 +726,8 @@ print("Exercise 53 is correct.")
 # %% [code]
 # Exercise 54
 # Write a function definition named last that takes in sequence and returns the last value of that sequence.
-
+def last(s):
+    return s[-1]
 assert last("ubuntu") == "u"
 assert last([1, 2, 3, 4]) == 4
 assert last(["python", "is", "awesome"]) == "awesome"
@@ -720,7 +737,8 @@ print("Exercise 54 is correct.")
 # %% [code]
 # Exercise 55
 # Write a function definition named second_to_last that takes in sequence and returns the second to last value of that sequence.
-
+def second_to_last(s):
+    return s[-2]
 assert second_to_last("ubuntu") == "t"
 assert second_to_last([1, 2, 3, 4]) == 3
 assert second_to_last(["python", "is", "awesome"]) == "is"
@@ -730,7 +748,8 @@ print("Exercise 55 is correct.")
 # %% [code]
 # Exercise 56
 # Write a function definition named third_to_last that takes in sequence and returns the third to last value of that sequence.
-
+def third_to_last(s):
+    return s[-3]
 assert third_to_last("ubuntu") == "n"
 assert third_to_last([1, 2, 3, 4]) == 2
 assert third_to_last(["python", "is", "awesome"]) == "python"
@@ -740,7 +759,12 @@ print("Exercise 56 is correct.")
 # %% [code]
 # Exercise 57
 # Write a function definition named first_and_second that takes in sequence and returns the first and second value of that sequence as a list
-
+def first_and_second(s):
+    out=[]
+    #assuming list always has at least 2 elements
+    out.append(first(s))
+    out.append(second(s))
+    return out
 assert first_and_second([1, 2, 3, 4]) == [1, 2]
 assert first_and_second(["python", "is", "awesome"]) == ["python", "is"]
 assert first_and_second(["strawberry", "kiwi", "mango", "guava"]) == ["strawberry", "kiwi"]
@@ -749,7 +773,11 @@ print("Exercise 57 is correct.")
 # %% [code]
 # Exercise 58
 # Write a function definition named first_and_last that takes in sequence and returns the first and last value of that sequence as a list
-
+def first_and_last(s):
+    out=[]
+    out.append(first(s))
+    out.append(last(s))
+    return out  
 assert first_and_last([1, 2, 3, 4]) == [1, 4]
 assert first_and_last(["python", "is", "awesome"]) == ["python", "awesome"]
 assert first_and_last(["strawberry", "kiwi", "mango", "guava"]) == ["strawberry", "guava"]
@@ -758,7 +786,10 @@ print("Exercise 58 is correct.")
 # %% [code]
 # Exercise 59
 # Write a function definition named first_to_last that takes in sequence and returns the sequence with the first value moved to the end of the sequence.
-
+def first_to_last(s):
+    #assuming at least 2 elements in sequence
+    s.append(s[0])
+    return s[1:]
 assert first_to_last([1, 2, 3, 4]) == [2, 3, 4, 1]
 assert first_to_last(["python", "is", "awesome"]) == ["is", "awesome", "python"]
 assert first_to_last(["strawberry", "kiwi", "mango", "guava"]) == ["kiwi", "mango", "guava", "strawberry"]
@@ -770,7 +801,11 @@ print("Exercise 59 is correct.")
 # %% [code]
 # Exercise 60
 # Write a function definition named sum_all that takes in sequence of numbers and returns all the numbers added together.
-
+def sum_all(s):
+    count=0
+    for num in s:
+        count+=num
+    return count
 assert sum_all([1, 2, 3, 4]) == 10
 assert sum_all([3, 3, 3]) == 9
 assert sum_all([0, 5, 6]) == 11
@@ -779,7 +814,8 @@ print("Exercise 60 is correct.")
 # %% [code]
 # Exercise 61
 # Write a function definition named mean that takes in sequence of numbers and returns the average value
-
+def mean(s):
+    return sum_all(s)/len(s)
 assert mean([1, 2, 3, 4]) == 2.5
 assert mean([3, 3, 3]) == 3
 assert mean([1, 5, 6]) == 4
@@ -788,7 +824,9 @@ print("Exercise 61 is correct.")
 # %% [code]
 # Exercise 62
 # Write a function definition named median that takes in sequence of numbers and returns the average value
-
+def median(s):
+    #assuming s is sorted
+    
 assert median([1, 2, 3, 4, 5]) == 3.0
 assert median([1, 2, 3]) == 2.0
 assert median([1, 5, 6]) == 5.0
