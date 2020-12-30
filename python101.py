@@ -1307,7 +1307,11 @@ print("Exercise 93 is complete.")
 # Write a function called highest_price_book that takes in the above defined list of dictionaries "books" and returns the dictionary containing the title, price, and author of the book with the highest priced book.
 # Hint: Much like sometimes start functions with a variable set to zero, you may want to create a dictionary with the price set to zero to compare to each dictionary's price in the list
 def highest_price_book(l):
-    
+    highest=l[0]
+    for book in l[1:]:
+        if get_price(book)>get_price(highest):
+            highest=book
+    return highest
 assert highest_price_book(books) == {
     "title": "The Visual Display of Quantitative Information",
     "price": 38.00,
@@ -1320,14 +1324,36 @@ print("Exercise 94 is complete")
 # Exercise 95
 # Write a function called lowest_priced_book that takes in the above defined list of dictionaries "books" and returns the dictionary containing the title, price, and author of the book with the lowest priced book.
 # Hint: Much like sometimes start functions with a variable set to zero or float('inf'), you may want to create a dictionary with the price set to float('inf') to compare to each dictionary in the list
-
-
+def lowest_price_book(l):
+    lowest=l[0]
+    for book in l[1:]:
+        if get_price(book)<get_price(lowest):
+            lowest=book
+    return lowest
+#typo priced and price
 assert lowest_price_book(books) == {
     "title": "Weapons of Math Destruction",
     "author": "Cathy O'Neil",
     "price": 17.44
 }
 print("Exercise 95 is complete.")
+
+# %% [code]
+# Exercise 100
+# Write a function named get_average_spent_per_item that takes in the shopping cart and returns the average of summing each item's quanties times that item's price.
+# Hint: You may need to set an initial total price and total total quantity to zero, then sum up and divide that total price by the total quantity
+def get_average_spent_per_item(c):
+    initial_total_price=0
+    total_qty=0
+    for item in c.get("items"):
+        qty=item.get("quantity")
+        price=item.get("price")
+        total_qty+=qty
+        initial_total_price+=(qty*price)
+    return initial_total_price/total_qty
+        
+assert get_average_spent_per_item(shopping_cart) == 1.333529411764706
+print("Exercise 100 is complete.")
 
 # %% [code]
 shopping_cart = {
@@ -1362,10 +1388,37 @@ shopping_cart = {
 }
 
 # %% [code]
+# Exercise 101
+# Write a function named most_spent_on_item that takes in the shopping cart as input and returns the dictionary associated with the item that has the highest price*quantity.
+# Be sure to do this as programmatically as possible. 
+# Hint: Similarly to how we sometimes begin a function with setting a variable to zero, we need a starting place:
+# Hint: Consider creating a variable that is a dictionary with the keys "price" and "quantity" both set to 0. You can then compare each item's price and quantity total to the one from "most"
+def most_spent_on_item(c):
+    items=c.get("items")
+    highest=items[0]
+    
+    for item in items[1:]:
+        if price(item)>price(highest):
+            highest=item
+    return highest
+ #helper function to find qty*price                      
+def price(item):
+    qty=item.get("quantity")
+    price=item.get("price")
+    return qty*price
+assert most_spent_on_item(shopping_cart) == {
+    "title": "chocolate",
+    "price": 0.75,
+    "quantity": 9
+}
+print("Exercise 101 is complete.")
+
+# %% [code]
 # Exercise 96
 # Write a function named get_tax_rate that takes in the above shopping cart as input and returns the tax rate.
 # Hint: How do you access a key's value on a dictionary? The tax rate is one key of the entire shopping_cart dictionary.
-
+def get_tax_rate(c):
+    return c.get("tax")
 assert get_tax_rate(shopping_cart) == .08
 print("Exercise 96 is complete")
 
@@ -1373,7 +1426,14 @@ print("Exercise 96 is complete")
 # Exercise 97
 # Write a function named number_of_item_types that takes in the shopping cart as input and returns the number of unique item types in the shopping cart. 
 # We're not yet using the quantity of each item, but rather focusing on determining how many different types of items are in the cart.
-
+def number_of_item_types(c):
+    list=[]
+    for item in c.get("items"):
+        list.append(item.get("title"))
+    #filter out duplicates
+    uniques=set(list)
+    return len(uniques)
+    
 assert number_of_item_types(shopping_cart) == 5
 print("Exercise 97 is complete.")
 
@@ -1381,6 +1441,11 @@ print("Exercise 97 is complete.")
 # Exercise 98
 # Write a function named total_number_of_items that takes in the shopping cart as input and returns the total number all item quantities.
 # This should return the sum of all of the quantities from each item type
+def total_number_of_items(c):
+    total=0
+    for item in c.get("items"):
+        total+=item.get("quantity")
+    return total
 
 assert total_number_of_items(shopping_cart) == 17
 print("Exercise 98 is complete.")
@@ -1389,30 +1454,16 @@ print("Exercise 98 is complete.")
 # Exercise 99
 # Write a function named get_average_item_price that takes in the shopping cart as an input and returns the average of all the item prices.
 # Hint - This should determine the total price divided by the number of types of items. This does not account for each item type's quantity.
+def get_average_item_price(c):
+    sum=0
+    num_items=0
+    for item in c.get("items"):
+        sum+=item.get("price")
+        num_items+=1
+    return sum/num_items
+
 assert get_average_item_price(shopping_cart) == 2.1420000000000003
 print("Exercise 99 is complete.")
-
-# %% [code]
-# Exercise 100
-# Write a function named get_average_spent_per_item that takes in the shopping cart and returns the average of summing each item's quanties times that item's price.
-# Hint: You may need to set an initial total price and total total quantity to zero, then sum up and divide that total price by the total quantity
-
-assert get_average_spent_per_item(shopping_cart) == 1.333529411764706
-print("Exercise 100 is complete.")
-
-# %% [code]
-# Exercise 101
-# Write a function named most_spent_on_item that takes in the shopping cart as input and returns the dictionary associated with the item that has the highest price*quantity.
-# Be sure to do this as programmatically as possible. 
-# Hint: Similarly to how we sometimes begin a function with setting a variable to zero, we need a starting place:
-# Hint: Consider creating a variable that is a dictionary with the keys "price" and "quantity" both set to 0. You can then compare each item's price and quantity total to the one from "most"
-
-assert most_spent_on_item(shopping_cart) == {
-    "title": "chocolate",
-    "price": 0.75,
-    "quantity": 9
-}
-print("Exercise 101 is complete.")
 
 # %% [markdown]
 # Created by [Ryan Orsinger](https://ryanorsinger.com)
