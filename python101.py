@@ -825,8 +825,16 @@ print("Exercise 61 is correct.")
 # Exercise 62
 # Write a function definition named median that takes in sequence of numbers and returns the average value
 def median(s):
-    #assuming s is sorted
-    
+    #assuming s is sorted in ascending or descending order
+    n=len(s)
+    median=0
+    if is_even(n):
+        median1 = s[n//2] 
+        median2 = s[n//2 - 1] 
+        median = (median1 + median2)/2.0
+    else:
+        median = s[n//2]/1.0
+    return median
 assert median([1, 2, 3, 4, 5]) == 3.0
 assert median([1, 2, 3]) == 2.0
 assert median([1, 5, 6]) == 5.0
@@ -836,7 +844,9 @@ print("Exercise 62 is correct.")
 # %% [code]
 # Exercise 63
 # Write a function definition named mode that takes in sequence of numbers and returns the most commonly occuring value
-
+import statistics
+def mode(s):
+    return statistics.mode(s)  
 assert mode([1, 2, 2, 3, 4]) == 2
 assert mode([1, 1, 2, 3]) == 1
 assert mode([2, 2, 3, 3, 3]) == 3
@@ -845,7 +855,11 @@ print("Exercise 63 is correct.")
 # %% [code]
 # Exercise 64
 # Write a function definition named product_of_all that takes in sequence of numbers and returns the product of multiplying all the numbers together
-
+def product_of_all(s):
+    count=1
+    for num in s:
+        count*=num
+    return count
 assert product_of_all([1, 2, 3]) == 6
 assert product_of_all([3, 4, 5]) == 60
 assert product_of_all([2, 2, 3, 0]) == 0
@@ -861,7 +875,8 @@ numbers = [-5, -4, -3, -2, -1, 1, 2, 3, 4, 5]
 # %% [code]
 # Exercise 65
 # Write a function definition named get_highest_number that takes in sequence of numbers and returns the largest number.
-
+def get_highest_number(s):
+    return max(s)
 assert get_highest_number([1, 2, 3]) == 3
 assert get_highest_number([-5, -4, -3, -2, -1, 1, 2, 3, 4, 5]) == 5
 assert get_highest_number([-5, -3, 1]) == 1
@@ -870,7 +885,8 @@ print("Exercise 65 is correct.")
 # %% [code]
 # Exercise 66
 # Write a function definition named get_smallest_number that takes in sequence of numbers and returns the smallest number.
-
+def get_smallest_number(s):
+    return min(s)
 assert get_smallest_number([1, 2, 3]) == 1
 assert get_smallest_number([-5, -4, -3, -2, -1, 1, 2, 3, 4, 5]) == -5
 assert get_smallest_number([-4, -3, 1]) == -4
@@ -879,7 +895,12 @@ print("Exercise 66 is correct.")
 # %% [code]
 # Exercise 67
 # Write a function definition named only_odd_numbers that takes in sequence of numbers and returns the odd numbers in a list.
-
+def only_odd_numbers(s):
+    odds=[]
+    for num in s:
+        if is_odd(num):
+            odds.append(num)
+    return odds
 assert only_odd_numbers([1, 2, 3]) == [1, 3]
 assert only_odd_numbers([-5, -4, -3, -2, -1, 1, 2, 3, 4, 5]) == [-5, -3, -1, 1, 3, 5]
 assert only_odd_numbers([-4, -3, 1]) == [-3, 1]
@@ -888,7 +909,12 @@ print("Exercise 67 is correct.")
 # %% [code]
 # Exercise 68
 # Write a function definition named only_even_numbers that takes in sequence of numbers and returns the even numbers in a list.
-
+def only_even_numbers(s):
+    evens=[]
+    for num in s:
+        if is_even(num):
+            evens.append(num)
+    return evens
 assert only_even_numbers([1, 2, 3]) == [2]
 assert only_even_numbers([-5, -4, -3, -2, -1, 1, 2, 3, 4, 5]) == [-4, -2, 2, 4]
 assert only_even_numbers([-4, -3, 1]) == [-4]
@@ -897,7 +923,12 @@ print("Exercise 68 is correct.")
 # %% [code]
 # Exercise 69
 # Write a function definition named only_positive_numbers that takes in sequence of numbers and returns the positive numbers in a list.
-
+def only_positive_numbers(s):
+    positives=[]
+    for num in s:
+        if is_positive(num):
+            positives.append(num)
+    return positives 
 assert only_positive_numbers([1, 2, 3]) == [1, 2, 3]
 assert only_positive_numbers([-5, -4, -3, -2, -1, 1, 2, 3, 4, 5]) == [1, 2, 3, 4, 5]
 assert only_positive_numbers([-4, -3, 1]) == [1]
@@ -906,7 +937,12 @@ print("Exercise 69 is correct.")
 # %% [code]
 # Exercise 70
 # Write a function definition named only_negative_numbers that takes in sequence of numbers and returns the negative numbers in a list.
-
+def only_negative_numbers(s):
+    negatives=[]
+    for num in s:
+        if is_negative(num):
+            negatives.append(num)
+    return negatives 
 assert only_negative_numbers([1, 2, 3]) == []
 assert only_negative_numbers([-5, -4, -3, -2, -1, 1, 2, 3, 4, 5]) == [-5, -4, -3, -2, -1]
 assert only_negative_numbers([-4, -3, 1]) == [-4, -3]
@@ -915,7 +951,11 @@ print("Exercise 70 is correct.")
 # %% [code]
 # Exercise 71
 # Write a function definition named has_evens that takes in sequence of numbers and returns True if there are any even numbers in the sequence
-
+def has_evens(s):
+    for num in s:
+        if is_even(num):
+            return True
+    return False
 assert has_evens([1, 2, 3]) == True
 assert has_evens([2, 5, 6]) == True
 assert has_evens([3, 3, 3]) == False
@@ -925,7 +965,12 @@ print("Exercise 71 is correct.")
 # %% [code]
 # Exercise 72
 # Write a function definition named count_evens that takes in sequence of numbers and returns the number of even numbers
-
+def count_evens(s):
+    count=0
+    for num in s:
+        if is_even(num):
+            count+=1
+    return count
 assert count_evens([1, 2, 3]) == 1
 assert count_evens([2, 5, 6]) == 2
 assert count_evens([3, 3, 3]) == 0
@@ -935,7 +980,11 @@ print("Exercise 72 is correct.")
 # %% [code]
 # Exercise 73
 # Write a function definition named has_odds that takes in sequence of numbers and returns True if there are any odd numbers in the sequence
-
+def has_odds(s):
+    for num in s:
+        if is_odd(num):
+            return True
+    return False
 assert has_odds([1, 2, 3]) == True
 assert has_odds([2, 5, 6]) == True
 assert has_odds([3, 3, 3]) == True
@@ -945,7 +994,12 @@ print("Exercise 73 is correct.")
 # %% [code]
 # Exercise 74
 # Write a function definition named count_odds that takes in sequence of numbers and returns True if there are any odd numbers in the sequence
-
+def count_odds(s):
+    count=0
+    for num in s:
+        if is_odd(num):
+            count+=1
+    return count
 assert count_odds([1, 2, 3]) == 2
 assert count_odds([2, 5, 6]) == 1
 assert count_odds([3, 3, 3]) == 3
@@ -955,7 +1009,12 @@ print("Exercise 74 is correct.")
 # %% [code]
 # Exercise 75
 # Write a function definition named count_negatives that takes in sequence of numbers and returns a count of the number of negative numbers
-
+def count_negatives(s):
+    count=0
+    for num in s:
+        if is_negative(num):
+            count+=1
+    return count
 assert count_negatives([1, -2, 3]) == 1
 assert count_negatives([2, -5, -6]) == 2
 assert count_negatives([3, 3, 3]) == 0
@@ -964,7 +1023,12 @@ print("Exercise 75 is correct.")
 # %% [code]
 # Exercise 76
 # Write a function definition named count_positives that takes in sequence of numbers and returns a count of the number of positive numbers
-
+def count_positives(s):
+    count=0
+    for num in s:
+        if is_positive(num):
+            count+=1
+    return count
 assert count_positives([1, -2, 3]) == 2
 assert count_positives([2, -5, -6]) == 1
 assert count_positives([3, 3, 3]) == 3
@@ -974,7 +1038,12 @@ print("Exercise 76 is correct.")
 # %% [code]
 # Exercise 77
 # Write a function definition named only_positive_evens that takes in sequence of numbers and returns a list containing all the positive evens from the sequence
-
+def only_positive_evens(s):
+    positive_evens=[]
+    for num in s:
+        if is_positive(num) and is_even(num):
+            positive_evens.append(num)
+    return positive_evens
 assert only_positive_evens([1, -2, 3]) == []
 assert only_positive_evens([2, -5, -6]) == [2]
 assert only_positive_evens([3, 3, 4, 6]) == [4, 6]
@@ -984,7 +1053,12 @@ print("Exercise 77 is correct.")
 # %% [code]
 # Exercise 78
 # Write a function definition named only_positive_odds that takes in sequence of numbers and returns a list containing all the positive odd numbers from the sequence
-
+def only_positive_odds(s):
+    positive_odds=[]
+    for num in s:
+        if is_positive(num) and is_odd(num):
+            positive_odds.append(num)
+    return positive_odds 
 assert only_positive_odds([1, -2, 3]) == [1, 3]
 assert only_positive_odds([2, -5, -6]) == []
 assert only_positive_odds([3, 3, 4, 6]) == [3, 3]
@@ -994,7 +1068,12 @@ print("Exercise 78 is correct.")
 # %% [code]
 # Exercise 79
 # Write a function definition named only_negative_evens that takes in sequence of numbers and returns a list containing all the negative even numbers from the sequence
-
+def only_negative_evens(s):
+    list=[]
+    for num in s:
+        if is_negative(num) and is_even(num):
+            list.append(num)
+    return list
 assert only_negative_evens([1, -2, 3]) == [-2]
 assert only_negative_evens([2, -5, -6]) == [-6]
 assert only_negative_evens([3, 3, 4, 6]) == []
@@ -1004,7 +1083,12 @@ print("Exercise 79 is correct.")
 # %% [code]
 # Exercise 80
 # Write a function definition named only_negative_odds that takes in sequence of numbers and returns a list containing all the negative odd numbers from the sequence
-
+def only_negative_odds(s):
+    list=[]
+    for num in s:
+        if is_negative(num) and is_odd(num):
+            list.append(num)
+    return list
 assert only_negative_odds([1, -2, 3]) == []
 assert only_negative_odds([2, -5, -6]) == [-5]
 assert only_negative_odds([3, 3, 4, 6]) == []
@@ -1014,7 +1098,12 @@ print("Exercise 80 is correct.")
 # %% [code]
 # Exercise 81
 # Write a function definition named shortest_string that takes in a list of strings and returns the shortest string in the list.
-
+def shortest_string(s):
+    shortest=s[0]
+    for string in s[1:]:
+        if len(string)<len(shortest):
+            shortest=string
+    return shortest
 assert shortest_string(["kiwi", "mango", "strawberry"]) == "kiwi"
 assert shortest_string(["hello", "everybody"]) == "hello"
 assert shortest_string(["mary", "had", "a", "little", "lamb"]) == "a"
@@ -1023,7 +1112,12 @@ print("Exercise 81 is correct.")
 # %% [code]
 # Exercise 82
 # Write a function definition named longest_string that takes in sequence of strings and returns the longest string in the list.
-
+def longest_string(s):
+    longest=s[0]
+    for string in s[1:]:
+        if len(string)>len(longest):
+            longest=string
+    return longest
 assert longest_string(["kiwi", "mango", "strawberry"]) == "strawberry"
 assert longest_string(["hello", "everybody"]) == "everybody"
 assert longest_string(["mary", "had", "a", "little", "lamb"]) == "little"
@@ -1041,7 +1135,8 @@ print(set([1, 2, 2, 3, 3, 3, 4, 4, 4, 4]))
 # %% [code]
 # Exercise 83
 # Write a function definition named get_unique_values that takes in a list and returns a set with only the unique values from that list.
-
+def get_unique_values(l):
+    return set(l)
 assert get_unique_values(["ant", "ant", "mosquito", "mosquito", "ladybug"]) == {"ant", "mosquito", "ladybug"}
 assert get_unique_values(["b", "a", "n", "a", "n", "a", "s"]) == {"b", "a", "n", "s"}
 assert get_unique_values(["mary", "had", "a", "little", "lamb", "little", "lamb", "little", "lamb"]) == {"mary", "had", "a", "little", "lamb"}
@@ -1050,7 +1145,10 @@ print("Exercise 83 is correct.")
 # %% [code]
 # Exercise 84
 # Write a function definition named get_unique_values_from_two_lists that takes two lists and returns a single set with only the unique values
-
+def get_unique_values_from_two_lists(l,m):
+    list_actual=l+m
+    return get_unique_values(list_actual)    
+        
 assert get_unique_values_from_two_lists([5, 1, 2, 3], [3, 4, 5, 5]) == {1, 2, 3, 4, 5}
 assert get_unique_values_from_two_lists([1, 1], [2, 2, 3]) == {1, 2, 3}
 assert get_unique_values_from_two_lists(["tomato", "mango", "kiwi"], ["eggplant", "tomato", "broccoli"]) == {"tomato", "mango", "kiwi", "eggplant", "broccoli"}
@@ -1059,7 +1157,12 @@ print("Exercise 84 is correct.")
 # %% [code]
 # Exercise 85
 # Write a function definition named get_values_in_common that takes two lists and returns a single set with the values that each list has in common
-
+def get_values_in_common(l,m):
+    list=[]
+    for object in l:
+        if object in m:
+            list.append(object)
+    return set(list)
 assert get_values_in_common([5, 1, 2, 3], [3, 4, 5, 5]) == {3, 5}
 assert get_values_in_common([1, 2], [2, 2, 3]) == {2}
 assert get_values_in_common(["tomato", "mango", "kiwi"], ["eggplant", "tomato", "broccoli"]) == {"tomato"}
@@ -1068,7 +1171,15 @@ print("Exercise 85 is correct.")
 # %% [code]
 # Exercise 86
 # Write a function definition named get_values_not_in_common that takes two lists and returns a single set with the values that each list does not have in common
-
+def get_values_not_in_common(l,m):
+    list=[]
+    for object in l:
+        if object not in m:
+            list.append(object)
+    for object in m:
+        if object not in l:
+           list.append(object) 
+    return set(list)
 assert get_values_not_in_common([5, 1, 2, 3], [3, 4, 5, 5]) == {1, 2, 4}
 assert get_values_not_in_common([1, 1], [2, 2, 3]) == {1, 2, 3}
 assert get_values_not_in_common(["tomato", "mango", "kiwi"], ["eggplant", "tomato", "broccoli"]) == {"mango", "kiwi", "eggplant", "broccoli"}
@@ -1096,7 +1207,8 @@ thomas_paper = {
 # %% [code]
 # Exercise 87
 # Write a function named get_paper_title that takes in a dictionary and returns the title property
-
+def get_paper_title(d):
+    return d.get ("title")
 assert get_paper_title(tukey_paper) == "The Future of Data Analysis"
 assert get_paper_title(thomas_paper) == "A mathematical model of glutathione metabolism"
 print("Exercise 87 is correct.")
@@ -1104,7 +1216,8 @@ print("Exercise 87 is correct.")
 # %% [code]
 # Exercise 88
 # Write a function named get_year_published that takes in a dictionary and returns the value behind the "year_published" key.
-
+def get_year_published(d):
+    return d.get("year_published")
 assert get_year_published(tukey_paper) == 1962
 assert get_year_published(thomas_paper) == 2008
 print("Exercise 88 is correct.")
@@ -1120,15 +1233,16 @@ book = {
 # %% [code]
 # Exercise 89
 # Write a function named get_price that takes in a dictionary and returns the price
-
+def get_price(d):
+    return d.get("price")
 assert get_price(book) == 36.99
 print("Exercise 89 is complete.")
 
 # %% [code]
 # Exercise 90
 # Write a function named get_book_author that takes in a dictionary (the above declared book variable) and returns the author's name
-
-
+def get_book_author(d):
+    return d.get("author")
 assert get_book_author(book) == "Frances Buontempo"
 print("Exercise 90 is complete.")
 
@@ -1164,21 +1278,27 @@ books = [
 # %% [code]
 # Exercise 91
 # Write a function named get_number_of_books that takes in a list of objects and returns the number of dictionaries in that list.
-
+def get_number_of_books(l):
+    return len(l)
 assert get_number_of_books(books) == 4
 print("Exercise 91 is complete.")
 
 # %% [code]
 # Exercise 92
 # Write a function named total_of_book_prices that takes in a list of dictionaries and returns the sum total of all the book prices added together
-
+def total_of_book_prices(l):
+    sum=0
+    for d in l:
+        sum+=get_price(d)
+    return sum
 assert total_of_book_prices(books) == 122.9
 print("Exercise 92 is complete.")
 
 # %% [code]
 # Exercise 93
 # Write a function named get_average_book_price that takes in a list of dictionaries and returns the average book price.
-
+def get_average_book_price(l):
+    return total_of_book_prices(l)/get_number_of_books(l)
 assert get_average_book_price(books) == 30.725
 print("Exercise 93 is complete.")
 
@@ -1186,7 +1306,8 @@ print("Exercise 93 is complete.")
 # Exercise 94
 # Write a function called highest_price_book that takes in the above defined list of dictionaries "books" and returns the dictionary containing the title, price, and author of the book with the highest priced book.
 # Hint: Much like sometimes start functions with a variable set to zero, you may want to create a dictionary with the price set to zero to compare to each dictionary's price in the list
-
+def highest_price_book(l):
+    
 assert highest_price_book(books) == {
     "title": "The Visual Display of Quantitative Information",
     "price": 38.00,
